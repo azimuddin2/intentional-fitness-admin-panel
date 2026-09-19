@@ -1,5 +1,5 @@
 export type TChangePassword = {
-    oldPassword: string;
-    newPassword: string;
-    confirmPassword: string;
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 };

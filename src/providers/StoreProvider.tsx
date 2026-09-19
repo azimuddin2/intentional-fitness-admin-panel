@@ -6,19 +6,19 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { makeStore } from '../redux/store';
 
 export default function StoreProvider({ children }: { children: ReactNode }) {
-    const storeRef = useRef<ReturnType<typeof makeStore> | null>(null);
+  const storeRef = useRef<ReturnType<typeof makeStore> | null>(null);
 
-    if (!storeRef.current) {
-        storeRef.current = makeStore();
-    }
+  if (!storeRef.current) {
+    storeRef.current = makeStore();
+  }
 
-    const { store, persistor } = storeRef.current;
+  const { store, persistor } = storeRef.current;
 
-    return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                {children}
-            </PersistGate>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
 }
