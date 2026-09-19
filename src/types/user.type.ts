@@ -4,7 +4,7 @@ export type TStatus = 'ongoing' | 'confirmed' | 'blocked';
 
 export type TGender = 'male' | 'female' | 'other';
 
-export type TUser = {
+export interface IUser {
   _id: string;
   name: string;
   email: string;
@@ -38,4 +38,4 @@ export type TUser = {
   createdAt: string;
   updatedAt: string;
   __v: number;
-};
+}
