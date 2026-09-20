@@ -123,6 +123,7 @@ const ForgotPasswordForm = () => {
                         type="email"
                         {...field}
                         value={field.value || ''}
+                        placeholder="Enter your email"
                         className="bg-white border border-gray-300 rounded-md py-5"
                       />
                     </FormControl>

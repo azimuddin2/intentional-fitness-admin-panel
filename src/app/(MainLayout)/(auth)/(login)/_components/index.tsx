@@ -142,6 +142,7 @@ const LoginForm = () => {
                         type="email"
                         {...field}
                         value={field.value || ''}
+                        placeholder="Enter your email"
                         className="bg-white border border-gray-300 rounded-md py-5"
                       />
                     </FormControl>
@@ -164,6 +165,7 @@ const LoginForm = () => {
                         type={showPassword ? 'text' : 'password'}
                         {...field}
                         value={field.value || ''}
+                        placeholder="Enter your password"
                         className="bg-white border border-gray-300 rounded-md py-5 pr-10"
                       />
                     </FormControl>
@@ -197,7 +199,7 @@ const LoginForm = () => {
                 </label>
                 <Link
                   href="/forgot-password"
-                  className="text-sm text-red-500 hover:underline"
+                  className="text-sm text-red-500 hover:text-red-600 underline"
                 >
                   Forgot Password?
                 </Link>

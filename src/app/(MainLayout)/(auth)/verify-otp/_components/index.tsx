@@ -5,13 +5,13 @@ import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Form } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
-// import { useVerifyOtpMutation } from '@/redux/features/otp/otpApi';
+import { useVerifyOtpMutation } from '@/src/redux/features/otp/otpApi';
 import { toast } from 'sonner';
 import { TResponse } from '@/src/types/global.type';
-import { AppButton } from '@/src/components/shared/app-button';
 import Image from 'next/image';
 import loginBackground from '@/src/assets/login-background.png';
 import logo from '@/src/assets/logo.png';
+import { AppButton } from '@/src/components/shared/app-button';
 
 const OTP_LENGTH = 4;
 
@@ -50,25 +50,27 @@ const VerifyOtpForm = () => {
 
   const router = useRouter();
 
-  // const [verifyOtp] = useVerifyOtpMutation();
+  const [verifyOtp] = useVerifyOtpMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async () => {
-    // const otpCode = otp.join('');
-    // if (!isOtpComplete) return;
-    // try {
-    //     const res = (await verifyOtp({ otp: otpCode })) as TResponse<
-    //         string | any
-    //     >;
-    //     if (res.error) {
-    //         toast.error(res.error.data.message);
-    //     } else {
-    //         toast.success('OTP verified. Please reset your password.');
-    //         router.push('/reset-password');
-    //     }
-    // } catch (error: any) {
-    //     const message = error?.data?.message || error?.message;
-    //     toast.error(message);
-    // }
+    const otpCode = otp.join('');
+    if (!isOtpComplete) return;
+
+    try {
+      const res = (await verifyOtp({ otp: otpCode })) as TResponse<
+        string | any
+      >;
+
+      if (res.error) {
+        toast.error(res.error.data.message);
+      } else {
+        toast.success('OTP verified. Please reset your password.');
+        router.push('/reset-password');
+      }
+    } catch (error: any) {
+      const message = error?.data?.message || error?.message;
+      toast.error(message);
+    }
   };
 
   return (
@@ -131,6 +133,7 @@ const VerifyOtpForm = () => {
 
               {/* Submit Button */}
               <AppButton
+                disabled={!isOtpComplete || isSubmitting}
                 className="w-full text-white bg-[#1c3b4a] hover:bg-[#16303c] rounded-md py-5 mt-2"
                 content={
                   <div className="flex justify-center items-center space-x-2 font-medium">
