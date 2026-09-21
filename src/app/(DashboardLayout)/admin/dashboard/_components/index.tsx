@@ -1,7 +1,9 @@
+import UserTrainerStats from './UserTrainerStats';
+
 const Dashboard = () => {
   return (
     <div>
-      <h1>Dashboard Page</h1>
+      <UserTrainerStats />
     </div>
   );
 };
