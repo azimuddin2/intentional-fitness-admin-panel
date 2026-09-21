@@ -33,21 +33,28 @@ const userApi = baseApi.injectEndpoints({
       providesTags: ['User'],
     }),
 
-    getUserProfile: builder.query<TResponse<IUser>, string>({
-      query: (email) => ({
-        url: `/users/profile/${email}`,
+    getUserProfile: builder.query<TResponse<IUser>, void>({
+      query: () => ({
+        url: `/users/profile`,
         method: 'GET',
         credentials: 'include',
       }),
       providesTags: ['User'],
     }),
 
-    updateUserProfile: builder.mutation<
-      TResponse<IUser>,
-      { email: string; body: FormData }
-    >({
-      query: ({ email, body }) => ({
-        url: `/users/profile/${email}`,
+    updateUserProfile: builder.mutation<TResponse<IUser>, { body: FormData }>({
+      query: ({ body }) => ({
+        url: `/users/profile`,
+        method: 'PATCH',
+        body,
+        credentials: 'include',
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    updateUserPicture: builder.mutation<TResponse<IUser>, { body: FormData }>({
+      query: ({ body }) => ({
+        url: `/users/profile/picture`,
         method: 'PATCH',
         body,
         credentials: 'include',
@@ -84,5 +91,6 @@ export const {
   useGetUserProfileQuery,
   useChangeUserStatusMutation,
   useUpdateUserProfileMutation,
+  useUpdateUserPictureMutation,
   useReactivateUserAccountMutation,
 } = userApi;

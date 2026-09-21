@@ -175,7 +175,7 @@ const ChangePassword = () => {
           <AppButton
             className="w-full text-white bg-[#1c3b4a] hover:bg-[#16303c] rounded-md py-5 mt-2"
             content={
-              <div className="flex justify-center items-center space-x-2 font-semibold">
+              <div className="flex justify-center items-center space-x-2 font-medium uppercase">
                 {isSubmitting ? 'Updating Password...' : 'Update Password'}
                 <ArrowRight />
               </div>

@@ -66,24 +66,26 @@ const CountrySelect = ({ disabled = false, value, onChange, options }) => {
 
   return (
     <Popover>
-      <PopoverTrigger>
-        <Button
-          type="button"
-          variant={'outline'}
-          className={cn(
-            'flex gap-1 rounded-e-none rounded-s-sm border border-primary-black/10 px-3 bg-[#f5f5f5] py-6 border-none rounded-sm',
-          )}
-          disabled={disabled}
-        >
-          <FlagComponent country={value} countryName={value} />
-          <ChevronsUpDown
+      <PopoverTrigger
+        render={
+          <Button
+            type="button"
+            variant={'outline'}
             className={cn(
-              '-mr-2 h-6 w-6 opacity-50',
-              disabled ? 'hidden' : 'opacity-100',
+              'flex gap-1 rounded-e-none rounded-s-sm border border-primary-black/10 px-3 bg-[#f5f5f5] py-6 border-none rounded-sm',
             )}
-          />
-        </Button>
-      </PopoverTrigger>
+            disabled={disabled}
+          >
+            <FlagComponent country={value} countryName={value} />
+            <ChevronsUpDown
+              className={cn(
+                '-mr-2 h-6 w-6 opacity-50',
+                disabled ? 'hidden' : 'opacity-100',
+              )}
+            />
+          </Button>
+        }
+      />
       <PopoverContent className="w-[300px] p-0">
         <Command>
           <CommandList>

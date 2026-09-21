@@ -39,7 +39,6 @@ const EditProfile = ({ userData, imageFile, refetch }: Props) => {
     },
   });
 
-  // Reset form values when userData is available
   useEffect(() => {
     if (userData) {
       form.reset({
@@ -61,18 +60,17 @@ const EditProfile = ({ userData, imageFile, refetch }: Props) => {
     const formData = new FormData();
     formData.append('data', JSON.stringify(data));
 
-    if (imageFile) formData.append('profile', imageFile); // direct use props
+    if (imageFile) formData.append('image', imageFile);
 
     const toastId = toast.loading('Updating Profile...');
 
     try {
       const res = await updateUserProfile({
-        email: userData.email,
         body: formData,
       }).unwrap();
 
       toast.success(res.message || 'Profile updated successfully');
-      refetch(); // optional
+      refetch();
     } catch (error: any) {
       toast.error(error?.data?.message || 'Failed to update profile');
     } finally {
@@ -85,7 +83,7 @@ const EditProfile = ({ userData, imageFile, refetch }: Props) => {
       <h2 className=" text-center text-2xl font-medium">Edit Your Profile</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-6">
-          {/* First Name */}
+          {/* Name */}
           <FormField
             control={form.control}
             name="name"
@@ -97,7 +95,7 @@ const EditProfile = ({ userData, imageFile, refetch }: Props) => {
                 <FormControl>
                   <Input
                     type="text"
-                    placeholder="First Name"
+                    placeholder="Enter Your Name"
                     {...field}
                     value={field.value || ''}
                     className="bg-[#f5f5f5] py-6 border-none rounded-sm"
@@ -159,7 +157,7 @@ const EditProfile = ({ userData, imageFile, refetch }: Props) => {
           <AppButton
             className="w-full text-white bg-[#1c3b4a] hover:bg-[#16303c] rounded-md py-5 mt-2"
             content={
-              <div className="flex justify-center items-center space-x-2 font-semibold">
+              <div className="flex justify-center items-center space-x-2 font-medium">
                 <p className="uppercase">
                   {isSubmitting ? 'Saving...' : 'Save Change'}
                 </p>

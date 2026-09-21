@@ -4,23 +4,17 @@ import { useState } from 'react';
 import EditProfile from './edit-profile';
 import ChangePassword from './change-password';
 import { IUser } from '@/src/types/user.type';
-import { useAppSelector } from '@/src/redux/hooks';
-import { selectCurrentUser } from '@/src/redux/features/auth/authSlice';
 import { useGetUserProfileQuery } from '@/src/redux/features/user/userApi';
 import Spinner from '@/src/components/shared/Spinner';
 import ImagePreviewer from '@/src/components/modules/ImageUploader/ImagePreviewer';
 import ImageUploader from '@/src/components/modules/ImageUploader';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { UserShield } from 'lucide-react';
 
 const Profile = () => {
-  const user = useAppSelector(selectCurrentUser);
-  const email = user?.email as string;
-
-  // Fetch user profile
-  const { data, isLoading, refetch } = useGetUserProfileQuery(email);
+  const { data, isLoading, refetch } = useGetUserProfileQuery();
   const userData: IUser | undefined = data?.data;
 
-  // Single image states
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>(
     userData?.image || '',
@@ -56,7 +50,10 @@ const Profile = () => {
         {/* User Info */}
         <div className="text-white">
           <h2 className="text-2xl font-semibold">{userData?.name}</h2>
-          <p className="text-base">{userData?.role}</p>
+          <p className="text-base capitalize flex items-center gap-1 mt-2">
+            {' '}
+            <UserShield /> <span>{userData?.role}</span>
+          </p>
         </div>
       </div>
 

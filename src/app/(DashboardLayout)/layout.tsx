@@ -12,8 +12,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { logout, selectCurrentUser } from '@/src/redux/features/auth/authSlice';
+import { useAppDispatch } from '@/src/redux/hooks';
+import { logout } from '@/src/redux/features/auth/authSlice';
 import Link from 'next/link';
 import { Bell, LogOut, UserPen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,11 +21,14 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 // import { useGetAllNotificationsQuery } from '@/redux/features/notification/notificationApi';
 import { AppSidebar } from '@/src/components/layout/app-sidebar';
+import { useGetUserProfileQuery } from '@/src/redux/features/user/userApi';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const user = useAppSelector(selectCurrentUser);
+  // const user = useAppSelector(selectCurrentUser);
+  const { data } = useGetUserProfileQuery();
+  const user = data?.data;
 
-  const userId = user?.userId;
+  const userId = user?._id;
 
   //   const { data } = useGetAllNotificationsQuery(
   //     { receiver: userId as string, page: 1, limit: 100 },
@@ -74,7 +77,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar className="cursor-pointer w-10 h-10 border-2 border-[#1c3b4a]">
-                    <AvatarImage src={user?.image} />
+                    <AvatarImage src={user?.image} alt="" />
                     <AvatarFallback className="bg-[#1c3b4a] text-white text-base">
                       {user?.name?.slice(0, 1)}
                     </AvatarFallback>

@@ -10,7 +10,7 @@ export interface IUser {
   email: string;
   phone: string;
 
-  image: string | null;
+  image: string;
   gender: TGender;
 
   password: string;
