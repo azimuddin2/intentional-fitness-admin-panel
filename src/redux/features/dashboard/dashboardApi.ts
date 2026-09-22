@@ -26,7 +26,30 @@ const dashboardApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Dashboard'],
     }),
+
+    getUserOverviewChart: builder.query<TResponse<any>, { year?: number }>({
+      query: ({ year }) => ({
+        url: `/dashboard/user-chart?year=${year}`,
+        method: 'GET',
+        credentials: 'include',
+      }),
+      providesTags: ['Dashboard'],
+    }),
+
+    getTrainerOverviewChart: builder.query<TResponse<any>, { year?: number }>({
+      query: ({ year }) => ({
+        url: `/dashboard/trainer-chart?year=${year}`,
+        method: 'GET',
+        credentials: 'include',
+      }),
+      providesTags: ['Dashboard'],
+    }),
   }),
 });
 
-export const { useGetTotalUsersQuery, useGetTotalTrainersQuery } = dashboardApi;
+export const {
+  useGetTotalUsersQuery,
+  useGetTotalTrainersQuery,
+  useGetUserOverviewChartQuery,
+  useGetTrainerOverviewChartQuery,
+} = dashboardApi;
