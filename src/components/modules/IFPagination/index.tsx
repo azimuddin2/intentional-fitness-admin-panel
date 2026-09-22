@@ -57,7 +57,9 @@ const ADPagination = ({ totalPage }: { totalPage: number }) => {
           variant={currentPage === index + 1 ? 'default' : 'outline'}
           size="sm"
           className={`w-8 h-8 rounded-full flex justify-center items-center ${
-            currentPage === index + 1 ? 'bg-[#1A73E8] text-white' : ''
+            currentPage === index + 1
+              ? 'bg-[#1c3b4a] text-white'
+              : 'bg-[#16303c]'
           }`}
         >
           {index + 1}

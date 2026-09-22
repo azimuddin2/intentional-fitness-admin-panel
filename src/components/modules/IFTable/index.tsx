@@ -35,9 +35,9 @@ export function ADTable<TData, TValue>({
   return (
     <div className="rounded-md border-0">
       <Table className="w-full">
-        <TableHeader className="bg-[#1A73E8]">
+        <TableHeader className="bg-[#1c3b4a]">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="h-14 hover:bg-[#1A73E8]">
+            <TableRow key={headerGroup.id} className="h-14 hover:bg-[#1c3b4a]">
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead
@@ -62,9 +62,7 @@ export function ADTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
-                className={`h-16 text-[#212529] font-medium text-base ${
-                  index % 2 === 0 ? 'bg-white' : 'bg-blue-50'
-                }`}
+                className={`h-16 text-[#212529] font-medium text-base bg-white`}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="px-5 lg:px-10">

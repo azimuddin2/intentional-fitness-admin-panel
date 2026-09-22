@@ -31,15 +31,13 @@ const MONTHS = [
   'December',
 ];
 
-// 1-9 hole 01-09 dekhabe, 10+ hole normal
 const formatCount = (value: number) => {
   const n = Math.round(value);
   return n < 10 ? String(n).padStart(2, '0') : n.toLocaleString('en-US');
 };
 
-// ---------- Reusable month dropdown (pill style) ----------
 type MonthSelectProps = {
-  value: number; // 1 - 12
+  value: number;
   onChange: (month: number) => void;
 };
 
@@ -49,7 +47,6 @@ const MonthSelect = ({ value, onChange }: MonthSelectProps) => (
       aria-label="Select month"
       className="h-8 w-auto gap-2 rounded-full border-none bg-[#0E3B47] py-0 pl-3 pr-1 text-xs font-normal text-white shadow-none focus:ring-0 [&>svg]:size-6 [&>svg]:rounded-full [&>svg]:bg-white [&>svg]:p-1 [&>svg]:text-[#0E3B47] [&>svg]:opacity-100"
     >
-      {/* Month er naam dekhabe, number na */}
       <SelectValue>{MONTHS[value - 1]}</SelectValue>
     </SelectTrigger>
     <SelectContent align="end">
@@ -62,7 +59,6 @@ const MonthSelect = ({ value, onChange }: MonthSelectProps) => (
   </Select>
 );
 
-// ---------- Reusable stat card ----------
 type CountCardProps = {
   title: string;
   icon: LucideIcon;
@@ -112,7 +108,6 @@ const CountCard = ({
 const UserTrainerStats = () => {
   const currentMonth = new Date().getMonth() + 1;
 
-  // Prottek card er nijer month state, tai ekta change korle onnota re-fetch hobe na
   const [userMonth, setUserMonth] = useState(currentMonth);
   const [trainerMonth, setTrainerMonth] = useState(currentMonth);
 

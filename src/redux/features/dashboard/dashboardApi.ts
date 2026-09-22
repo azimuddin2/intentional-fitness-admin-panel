@@ -44,6 +44,14 @@ const dashboardApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Dashboard'],
     }),
+
+    getRecentUsers: builder.query({
+      query: () => ({
+        url: '/dashboard/recent-users',
+        method: 'GET',
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -52,4 +60,5 @@ export const {
   useGetTotalTrainersQuery,
   useGetUserOverviewChartQuery,
   useGetTrainerOverviewChartQuery,
+  useGetRecentUsersQuery,
 } = dashboardApi;
