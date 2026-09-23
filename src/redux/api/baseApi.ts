@@ -76,12 +76,13 @@ export const baseApi = createApi({
   baseQuery: baseQueryWithRefreshToken,
   tagTypes: [
     'User',
+    'Survey',
+    'SurveyQuestion',
     'Privacy',
     'Terms',
     'About',
     'Dashboard',
     'Notification',
-    'ContactInfo',
   ],
   endpoints: () => ({}),
 });
