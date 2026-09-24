@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Trash2, ChevronDown, ChevronUp, Edit } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { TSurveyQuestion } from '@/src/types/surveyQuestion.type';
+import QuestionDeleteButton from './QuestionDeleteButton';
 
 const typeIcon: Record<string, string> = {
   short_text: '📝',
@@ -41,17 +42,21 @@ const QuestionCard = ({ q, index, onEdit, onDelete }: QuestionCardProps) => {
   const hasMore = options.length > 4;
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4 group">
+    <div className="bg-white border border-gray-200 rounded-xl p-4 group hover:border-gray-300 transition-colors">
       <div className="flex justify-between items-start gap-3">
         <div className="flex-1">
-          <div className="flex items-center gap-1 text-xs font-semibold text-gray-400 mb-1">
-            <span className="cursor-grab">⠿</span>
-            QUESTION {index + 1}
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400 mb-1.5">
+            <span className="bg-[#1c3b4a] text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">
+              {index + 1}
+            </span>
+            QUESTION
           </div>
 
-          <p className="font-medium text-[#212529] text-sm">{q.questionText}</p>
+          <p className="font-medium text-[#212529] text-sm leading-relaxed">
+            {q.questionText}
+          </p>
 
-          <div className="flex gap-2 mt-2 items-center flex-wrap">
+          <div className="flex gap-2 mt-2.5 items-center flex-wrap">
             <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-600 flex items-center gap-1">
               <span>{typeIcon[q.questionType]}</span>
               {typeLabel[q.questionType]}
@@ -90,7 +95,7 @@ const QuestionCard = ({ q, index, onEdit, onDelete }: QuestionCardProps) => {
               {hasMore && (
                 <button
                   onClick={() => setShowAll(!showAll)}
-                  className="mt-1.5 flex items-center gap-1 text-xs text-[#1c3b4a] font-medium cursor-pointer"
+                  className="mt-1.5 flex items-center gap-1 text-xs text-[#1c3b4a] font-medium cursor-pointer hover:underline"
                 >
                   {showAll ? (
                     <>
@@ -107,38 +112,28 @@ const QuestionCard = ({ q, index, onEdit, onDelete }: QuestionCardProps) => {
           )}
         </div>
 
-        <div className="flex items-center flex-shrink-0 gap-1">
+        <div className="flex items-center flex-shrink-0 gap-1.5">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger
                 render={
                   <button
+                    type="button"
                     onClick={onEdit}
-                    className="rounded-md p-1.5 text-[#1c3b4a] bg-gray-100"
+                    className="rounded-md p-2 text-[#1c3b4a] bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
                   >
                     <Edit size={16} />
                   </button>
                 }
               />
-              <TooltipContent>Edit</TooltipContent>
+              <TooltipContent>Edit question</TooltipContent>
             </Tooltip>
           </TooltipProvider>
 
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger
-                render={
-                  <button
-                    onClick={onDelete}
-                    className="rounded-md p-1.5 text-red-500 bg-red-50"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                }
-              />
-              <TooltipContent>Delete</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <QuestionDeleteButton
+            questionText={q.questionText}
+            onConfirm={onDelete}
+          />
         </div>
       </div>
     </div>

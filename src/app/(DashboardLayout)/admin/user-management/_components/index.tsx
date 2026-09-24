@@ -243,7 +243,7 @@ const UserManagement = () => {
     },
     {
       accessorKey: 'createdAt',
-      header: 'Date & Time',
+      header: 'Date of Join',
       cell: ({ row }) => (
         <span className="text-sm text-gray-500">
           {format(new Date(row.original.createdAt), 'dd MMM, yyyy')}

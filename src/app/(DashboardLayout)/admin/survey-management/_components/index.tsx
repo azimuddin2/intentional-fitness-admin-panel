@@ -7,7 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Edit, Eye, Search, ShieldBan, ShieldCheck } from 'lucide-react';
+import { Edit, Eye, Search } from 'lucide-react';
 import { format } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -23,6 +23,7 @@ import { ADTable } from '@/src/components/modules/IFTable';
 import ADPagination from '@/src/components/modules/IFPagination';
 import AddSurveyModal from './AddSurveyModal';
 import UpdateSurveyModal from './UpdateSurveyModal';
+import SurveyStatusToggle from './SurveyStatusToggle';
 
 const SurveyManagement = () => {
   const [updateModalSurvey, setUpdateModalSurvey] = useState<TSurvey | null>(
@@ -150,8 +151,6 @@ const SurveyManagement = () => {
       accessorKey: 'action',
       header: 'Action',
       cell: ({ row }) => {
-        const isActive = row.original.status === 'active';
-
         return (
           <div className="flex items-center gap-1">
             <TooltipProvider>
@@ -193,33 +192,10 @@ const SurveyManagement = () => {
               </Tooltip>
             </TooltipProvider>
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <button
-                      type="button"
-                      aria-label={isActive ? 'Deactivate' : 'Activate'}
-                      onClick={() => handleToggleStatus(row.original)}
-                      className={`rounded-md p-1.5 transition-colors cursor-pointer ${
-                        isActive
-                          ? 'text-[#FE5858] bg-red-50'
-                          : 'text-green-600 bg-green-50'
-                      }`}
-                    >
-                      {isActive ? (
-                        <ShieldBan size={18} />
-                      ) : (
-                        <ShieldCheck size={18} />
-                      )}
-                    </button>
-                  }
-                />
-                <TooltipContent>
-                  {isActive ? 'Deactivate' : 'Activate'}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <SurveyStatusToggle
+              isActive={row.original.status === 'active'}
+              onConfirm={() => handleToggleStatus(row.original)}
+            />
           </div>
         );
       },
@@ -231,7 +207,7 @@ const SurveyManagement = () => {
   }
 
   return (
-    <div className="">
+    <div>
       <div className="flex flex-col lg:justify-between lg:flex-row gap-4 mt-5 mb-5">
         <div className="relative w-full lg:w-3/5">
           <Input

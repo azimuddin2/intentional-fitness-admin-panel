@@ -116,7 +116,7 @@ const UpdateSurveyModal = ({
                       {...field}
                       value={field.value || ''}
                       placeholder="e.g. Welcome Survey"
-                      className="rounded-md py-5"
+                      className="rounded py-5"
                     />
                   </FormControl>
                   <FormMessage />
@@ -139,7 +139,7 @@ const UpdateSurveyModal = ({
                       value={field.value || ''}
                       placeholder="Short description about this survey"
                       rows={8}
-                      className="rounded-lg"
+                      className="rounded"
                     />
                   </FormControl>
                   <FormMessage />
