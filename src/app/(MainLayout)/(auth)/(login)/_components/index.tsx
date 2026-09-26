@@ -134,7 +134,7 @@ const LoginForm = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm text-gray-700 font-normal">
+                    <FormLabel className="text-sm !text-gray-700 font-normal">
                       Email
                     </FormLabel>
                     <FormControl>
@@ -157,7 +157,7 @@ const LoginForm = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem className="relative">
-                    <FormLabel className="text-sm text-gray-700 font-normal">
+                    <FormLabel className="text-sm !text-gray-700 font-normal">
                       Password
                     </FormLabel>
                     <FormControl>
